@@ -1,0 +1,102 @@
+{"properties": [
+  {
+    "name": "datasource.url",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.url'"
+  },
+  {
+    "name": "datasource.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.driverClassName'"
+  },
+  {
+    "name": "datasource.username",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.username'"
+  },
+  {
+    "name": "datasource.password",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.password'"
+  },
+  {
+    "name": "datasource.filters",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.filters'"
+  },
+  {
+    "name": "datasource.max-active",
+    "type": "java.lang.Integer",
+    "description": "A description for 'datasource.maxActive'"
+  },
+  {
+    "name": "datasource.initial-size",
+    "type": "java.lang.Integer",
+    "description": "A description for 'datasource.initialSize'"
+  },
+  {
+    "name": "datasource.max-wait",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.maxWait'"
+  },
+  {
+    "name": "datasource.min-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.minIdle'"
+  },
+  {
+    "name": "datasource.max-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.maxIdle'"
+  },
+  {
+    "name": "datasource.time-between-eviction-runs-millis",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.timeBetweenEvictionRunsMillis'"
+  },
+  {
+    "name": "datasource.min-evictable-idle-time-millis",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.minEvictableIdleTimeMillis'"
+  },
+  {
+    "name": "datasource.validation-query",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.validationQuery'"
+  },
+  {
+    "name": "datasource.test-while-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.testWhileIdle'"
+  },
+  {
+    "name": "datasource.test-on-borrow",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.testOnBorrow'"
+  },
+  {
+    "name": "datasource.test-on-return",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.testOnReturn'"
+  },
+  {
+    "name": "datasource.max-open-prepared-statements",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.maxOpenPreparedStatements'"
+  },
+  {
+    "name": "datasource.remove-abandoned",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.removeAbandoned'"
+  },
+  {
+    "name": "datasource.remove-abandoned-timeout",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.removeAbandonedTimeout'"
+  },
+  {
+    "name": "datasource.log-abandoned",
+    "type": "java.lang.String",
+    "description": "A description for 'datasource.logAbandoned'"
+  }
+]}

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.okmillet.regulate.sys.dao.SysUserMapper">
+
+	<resultMap id="rm" type="com.okmillet.regulate.sys.model.SysUser">
+		<result property="id" column="id"/>
+		<result property="userName" column="user_name"/>
+		<result property="userPwd" column="user_pwd"/>
+		<result property="createTime" column="create_time"/>
+	</resultMap>
+
+	<sql id="columns">
+	    <![CDATA[
+		id,user_name,user_pwd,create_time
+	    ]]>
+	</sql>
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+    <![CDATA[
+        INSERT INTO sys_user (id, user_name, user_pwd, create_time) 
+        VALUES (#{id}, #{userName}, #{userPwd}, #{createTime})
+    ]]>
+	</insert>
+
+	<update id="update">
+		UPDATE sys_user
+		<set>
+			<if test="userName!=null">user_name = #{userName} ,</if>
+			<if test="userPwd!=null">user_pwd = #{userPwd} ,</if>
+			<if test="createTime!=null">create_time = #{createTime} </if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteById">
+    <![CDATA[
+        DELETE FROM sys_user WHERE id = #{id}
+    ]]>
+	</delete>
+
+	<select id="getById" resultMap="rm">
+		SELECT <include refid="columns" />
+	    <![CDATA[
+		    FROM sys_user WHERE id = #{id}
+	    ]]>
+	</select>
+
+	<sql id="findByWhere">
+		<where>      				
+			<if test="id!=null">
+				AND id = #{id}
+			</if>
+			<if test="userName!=null and userName!=''">
+				AND user_name = #{userName}
+			</if>
+			<if test="userPwd!=null and userPwd!=''">
+				AND user_pwd = #{userPwd}
+			</if>
+			<if test="createTimeBegin!=null">
+				AND create_time >= #{createTimeBegin}
+			</if>
+			<if test="createTimeEnd!=null">
+				AND create_time &lt;= #{createTimeEnd}
+			</if>
+		</where>
+	</sql>
+
+	<select id="findcount" resultType="long">
+		SELECT count(*) FROM sys_user 
+		<include refid="findByWhere" />
+	</select>
+
+	<select id="findlist" resultMap="rm">
+		SELECT <include refid="columns" />
+		FROM sys_user
+		<include refid="findByWhere" />
+		<if test="sortColumns!=null and sortColumns!=''">
+			ORDER BY ${sortColumns}
+		</if>
+		<if test="cpage!=null and pageSize!=null">
+			limit #{startSize},#{pageSize}
+		</if>
+	</select>
+</mapper>

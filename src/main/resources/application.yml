@@ -1,0 +1,28 @@
+server:
+  port: 8080
+#  servlet:
+#    context-path: /simulator
+
+datasource:
+  url: jdbc:mysql://172.16.1.130:3306/regulate?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+  driverClassName: com.mysql.cj.jdbc.Driver
+  username: regulate
+  password: ecw654321
+  filters: stat
+  maxActive: 20
+  initialSize: 2
+  maxWait: 60000
+  minIdle: 5
+  maxIdle: 10
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  maxOpenPreparedStatements: 20
+  removeAbandoned: true
+  removeAbandonedTimeout: 1800
+  logAbandoned: true
+
+mybatis:
+  mapper-locations: classpath*:/com/**/model/mapper/*Mapper.xml
