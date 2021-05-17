@@ -197,10 +197,11 @@
 	
 }(window);
 
-layui.use(['layer','element','jquery'],function() {
+layui.use(['layer','element','jquery','form'],function() {
     layer = layui.layer;
     element = layui.element;
     $ = layui.jquery;
+    var form = layui.form;
 
 
     // 打开页面初始
@@ -333,9 +334,84 @@ layui.use(['layer','element','jquery'],function() {
         $('#tab_show').hide();
     });
 
+    form.on('checkbox(chkall)',function(data){
+    	if(data.elem.checked){
+    		jQuery(".layui-table").find("input[type='checkbox']").prop('checked',true);
+    		form.render();
+    	}else{
+    		jQuery(".layui-table").find("input[type='checkbox']").prop('checked',false);
+    		form.render();
+    	}
+    });
+
     // 页面加载完要做的
     xadmin.end();
 })
+
+function delRecord(uri){
+	var ch = jQuery(".layui-table").find('tbody input[type=checkbox]');
+	var cbs="";
+	for(var i=0,j=0;i<ch.length;i++){ 
+		if(ch[i].checked==true){
+			cbs=cbs+ch[i].value+",";
+		}
+	}
+	if(cbs.length<1){
+		layer.msg('请选择至少一条记录', {icon: 5});
+		return false;
+	}
+	layer.confirm('删除是不可恢复的，你确认要删除吗?', {icon: 3, title:'提示信息'}, function(index){
+		jQuery.ajax({    
+		    url:uri,
+		    data:{    
+		    	ids : cbs.substring(0, cbs.length-1)
+		    },
+		    type:'post',
+		    cache:false,
+		    dataType:'json',
+		    success:function(rs) {
+		        if(rs.resultCode =="0000" ){
+		        	layer.alert('删除成功!', {icon: 6},function(index){
+		        		jQuery('.layui-form').submit();
+		        		layer.close(index);
+		        	});
+		        }else{
+		        	layer.alert('操作失败!', {icon: 5});
+		        }
+		     },
+		     error:function(XMLHttpRequest, textStatus, errorThrown){
+		    	 layer.alert(errorThrown, {icon: 5});
+		     }
+		});
+		layer.close(index);
+	});
+}
+
+function del(uri,id){
+	layer.confirm('删除是不可恢复的，你确认要删除吗?', {icon: 3, title:'提示信息'}, function(index){
+		jQuery.ajax({    
+		    url:uri,
+		    data:{    
+		    	ids : id
+		    },
+		    type:'post',
+		    cache:false,
+		    dataType:'json',
+		    success:function(rs) {
+		        if(rs.resultCode =="0000" ){
+		        	layer.alert('删除成功!', {icon: 6},function(index){
+		        		jQuery('.layui-form').submit();
+		        		layer.close(index);
+		        	});
+		        }   
+		     },
+		     error:function(XMLHttpRequest, textStatus, errorThrown){
+		    	 layer.alert(errorThrown, {icon: 5});
+		     }
+		});
+		layer.close(index);
+	});
+}
 // md5-----------------------------------------------------------------------------------
 /*
 * Add integers, wrapping at 2^32. This uses 16-bit operations internally

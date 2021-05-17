@@ -1,0 +1,48 @@
+[#if 1 lt page.totalPage]<div class="layui-card-body">
+                            <div class="page">
+                                <div>
+                                    <a class="prev" href="javascript:void(0)" onclick="pageGo(1)">&lt;&lt;</a>
+                                    [#if page.cpage gt 1]
+                                    <a class="num" href="javascript:void(0)" onclick="pageGo(${page.cpage-1})">${page.cpage-1}</a>
+                                    [/#if]
+                                    <span class="current">${page.cpage}</span>
+                                    [#if page.cpage lt page.totalPage]
+                                    <a class="num" href="javascript:void(0)" onclick="pageGo(${page.cpage+1})">${page.cpage+1}</a>
+                                    [/#if]
+                                    [#if page.cpage+2 lt page.totalPage]
+                                    <span class="current">...</span>
+                                    [/#if]
+                                    [#if page.cpage+1 lt page.totalPage]
+                                    <a class="num" href="javascript:void(0)" onclick="pageGo(${page.totalPage})">${page.totalPage}</a>
+                                    [/#if]
+                                    <a class="next" href="javascript:void(0)" onclick="pageGo(${page.totalPage})">&gt;&gt;</a>
+                                </div>
+                            </div>
+                        </div>
+						<script type="text/javascript">
+							jQuery(document).ready(function(){
+								var qform = jQuery("form")[0];
+								if(jQuery(qform).find("input[name='pageSize']").length>0){
+									jQuery("#pageSize").val(jQuery(qform).find("input[name='pageSize']")[0].value);
+								}
+							});
+							function pageGo(p){
+								if(jQuery("form").length>0){
+									var qform = jQuery("form")[0];
+									if(jQuery(qform).find("input[name='cpage']").length>0){
+										jQuery(qform).find("input[name='cpage']")[0].value=p;
+									}else{
+										var cp = '<input type="hidden" name="cpage" value="'+p+'"/>';
+										jQuery(cp).appendTo(qform);
+									}
+									jQuery(qform).submit();
+								}else{
+									if(location.href.indexOf('?')>0){
+										location.href=location.href+"&cpage="+p+"&pageSize="+ps;
+									}else{
+										location.href=location.href+"?cpage="+p+"&pageSize="+ps;
+									}
+								}
+							}
+						</script>
+[/#if]
